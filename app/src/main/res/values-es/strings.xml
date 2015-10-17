@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Progress</string>
+    <string name="action_settings">Configuración</string>
+
+    <!-- REGISTER FORM-->
+    <string name="register_Name">Nombre</string>
+    <string name="register_Password">Contraseña</string>
+    <string name="register_Email">Email</string>
+    <string name="register_Register">Registrarse</string>
+    <string name="register_AlreadySignedIn"><u>Ya te registraste? Ingresa aquí!</u></string>
+
+    <!-- LOGIN FORM-->
+    <string name="login_button">Acceder</string>
+    <string name="login_cancel">Cancelar</string>
+    <string name="login_username">Usuario</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_title">Ingresa a Progress</string>
+
+    <!-- MAIN MENU-->
+    <string name="menu_settings">Configuración</string>
+    <string name="menu_signout">Cerrar Sesión</string>
+</resources>

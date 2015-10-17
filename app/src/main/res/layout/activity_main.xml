@@ -10,4 +10,57 @@
         android:src="@drawable/ic_menu"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:id="@+id/menu_btnGoals"
+        android:layout_marginBottom="@dimen/size155dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/size25dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:id="@+id/menu_btnSnapshot"
+        android:layout_alignTop="@+id/menu_btnGoals"
+        android:layout_toEndOf="@+id/menu_btnGoals"
+        android:layout_marginLeft="@dimen/size30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:id="@+id/menu_btnProgress"
+        android:layout_alignTop="@+id/menu_btnGoals"
+        android:layout_toEndOf="@+id/menu_btnSnapshot"
+        android:layout_marginLeft="@dimen/size30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:id="@+id/menu_btnSocial"
+        android:layout_below="@+id/menu_btnGoals"
+        android:layout_alignTop="@+id/menu_btnGoals"
+        android:layout_marginTop="@dimen/size100dp"
+        android:layout_marginLeft="@dimen/size75dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:id="@+id/menu_btnMemoryLane"
+        android:layout_below="@+id/menu_btnGoals"
+        android:layout_alignTop="@+id/menu_btnGoals"
+        android:layout_toEndOf="@+id/menu_btnSocial"
+        android:layout_marginTop="@dimen/size100dp"
+        android:layout_marginLeft="@dimen/size35dp" />
 </RelativeLayout>

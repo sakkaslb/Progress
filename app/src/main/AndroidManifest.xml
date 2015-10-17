@@ -15,9 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:label="Progress">
-        </activity>
-        <activity android:name=".LoginActivity" android:label="Progress"/>
+        <activity android:name=".MainActivity" android:label="Progress"/>
+        <activity android:name=".LoginActivity" android:label="Progress" android:theme="@style/Theme.FloatingWindow.Popup"/>
+        <activity android:name=".GoalsActivity" android:label="Progress"/>
     </application>
 
 </manifest>

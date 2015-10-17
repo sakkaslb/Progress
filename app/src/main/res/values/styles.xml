@@ -3,6 +3,48 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorControlHighlight">@color/accent</item>
+        <item name="colorControlActivated">@color/accent</item>
+    </style>
+    <style name="button">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColor">@color/icons</item>
+        <item name="android:textSize">@dimen/size12dp</item>
+        <item name="android:paddingStart">@dimen/size5dp</item>
+        <item name="android:layout_margin">@dimen/size25dp</item>
+        <item name="android:layout_marginTop">@dimen/size35dp</item>
+
+    </style>
+    <style name="label">
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textSize">@dimen/size12dp</item>
+    </style>
+    <style name="labellink">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">@dimen/size12dp</item>
+    </style>
+    <style name="textbox">
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textSize">@dimen/size14dp</item>
+        <item name="android:layout_marginTop">@dimen/size5dp</item>
+    </style>
+    <style name="PopupAnimation" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_out</item>
     </style>
 
+    <style name="Theme.FloatingWindow.Popup" parent="Theme.AppCompat.Light.NoActionBar" >
+
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">stateUnchanged</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowAnimationStyle">@style/PopupAnimation</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorControlHighlight">@color/accent</item>
+    </style>
 </resources>
