@@ -63,18 +63,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
             case R.id.menu_btnMemoryLane:{
                 Toast.makeText(this,"MEMORY LANE", Toast.LENGTH_SHORT).show();
+                Intent vintent=new Intent(this, MemoryActivity.class);
+                startActivity(vintent);
                 break;
             }
             case R.id.menu_btnProgress:{
                 Toast.makeText(this,"PROGRESS", Toast.LENGTH_SHORT).show();
+                Intent vintent=new Intent(this,ProgressActivity.class);
+                startActivity(vintent);
                 break;
             }
             case R.id.menu_btnSnapshot:{
                 Toast.makeText(this,"SNAPSHOT", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,0);
                 break;
             }
             case R.id.menu_btnSocial:{
                 Toast.makeText(this,"SOCIAL", Toast.LENGTH_SHORT).show();
+                Intent vintent=new Intent(this, SocialActivity.class);
+                startActivity(vintent);
                 break;
             }
         }

@@ -5,15 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
-
 /**
- * Created by Stefanie on 15/10/2015.
+ * Created by Stefanie on 17/10/2015.
  */
-public class GoalsActivity extends Activity {
+public class ProgressActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goals);
+        setContentView(R.layout.activity_progress);
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -25,5 +24,4 @@ public class GoalsActivity extends Activity {
         }
         return true;
     }
-
 }

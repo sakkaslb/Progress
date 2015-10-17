@@ -17,7 +17,10 @@
         </activity>
         <activity android:name=".MainActivity" android:label="Progress"/>
         <activity android:name=".LoginActivity" android:label="Progress" android:theme="@style/Theme.FloatingWindow.Popup"/>
-        <activity android:name=".GoalsActivity" android:label="Progress"/>
+        <activity android:name=".GoalsActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".MemoryActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ProgressActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SocialActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>
