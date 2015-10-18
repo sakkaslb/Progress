@@ -53,6 +53,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.menu_btnGoals:{
@@ -75,8 +80,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
             case R.id.menu_btnSnapshot:{
                 Toast.makeText(this,"SNAPSHOT", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,0);
+                Intent vintent=new Intent(this, SnapshotActivity.class);
+                startActivity(vintent);
                 break;
             }
             case R.id.menu_btnSocial:{
