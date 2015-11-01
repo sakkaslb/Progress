@@ -3,6 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="#ff000000"
     tools:context=".SnapshotActivity"
+    android:id="@+id/layout_snapshot"
     android:parentActivityName="android.massoluciones.com.progress.MainActivity">
 
 
@@ -19,18 +20,20 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:id="@+id/imgSnapshot"
                 android:src="@drawable/modeloskinny"
+                android:background="@color/accent"
                 android:layout_weight="1"
                 />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:id="@+id/imgPicked"
                 android:src="@drawable/modeloskinny"
+                android:background="@color/accent"
                 android:layout_weight="1"/>
         </LinearLayout>
 
