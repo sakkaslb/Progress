@@ -83,19 +83,22 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     ContentResolver cr = getContentResolver();
 
                     try {
-
-                        mPhoto = MediaStore.Images.Media.getBitmap(cr, mUri);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 4;
+                        mPhoto = BitmapFactory.decodeFile(mUri.getPath(), options);
                         Matrix matrix = new Matrix();
                         matrix.postRotate(90);
+                        Log.i("STEFANIE", String.valueOf(mPhoto.getHeight()));
+                        Log.i("STEFANIE", String.valueOf(mPhoto.getWidth()));
                         fotoTomada = Bitmap.createBitmap(mPhoto, 0, 0,
                                 mPhoto.getWidth(), mPhoto.getHeight(),
                                 matrix, true);
                         ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
                         fotoTomada.compress(Bitmap.CompressFormat.JPEG,0, bmpStream);
-                         img.setImageBitmap(fotoTomada);
+                        img.setImageBitmap(fotoTomada);
                         mPhoto.recycle();
                         bandera+=1;
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -188,17 +191,17 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
 
         Canvas comboImage = new Canvas(cs);
 
-        comboImage.drawBitmap(c, 0f, 0f, null);
-        comboImage.drawBitmap(s, 0f, c.getHeight(), null);
+        comboImage.drawBitmap(s, 0f, 0f, null);
+        comboImage.drawBitmap(c, s.getWidth(), 0f, null);
         String tmpImg = String.valueOf(System.currentTimeMillis()) + ".jpg";
 
-    OutputStream os = null;
-    try {
-      os = new FileOutputStream( Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg);
-      cs.compress(Bitmap.CompressFormat.JPEG,100 , os);
-    } catch(IOException e) {
-      Log.e("combineImages", "problem combining images", e);
-    }
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream( Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg);
+            cs.compress(Bitmap.CompressFormat.JPEG,100 , os);
+        } catch(IOException e) {
+            Log.e("combineImages", "problem combining images", e);
+        }
         return cs;
     }
 }

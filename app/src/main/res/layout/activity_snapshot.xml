@@ -17,7 +17,8 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/layout_snapshot_interno">
 
             <ImageView
                 android:layout_width="fill_parent"
@@ -32,7 +33,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/imgPicked"
-                android:src="@drawable/modeloskinny"
+                android:src="@drawable/ic_back"
                 android:background="@color/accent"
                 android:layout_weight="1"/>
         </LinearLayout>
