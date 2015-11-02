@@ -22,4 +22,8 @@
     <!-- MAIN MENU-->
     <string name="menu_settings">Settings</string>
     <string name="menu_signout">Sign Out</string>
+
+    <!-- SNAPSHOT MENU-->
+    <string name="snapshot_share">Share</string>
+    <string name="snapshot_pickimages">Pick your images</string>
 </resources>

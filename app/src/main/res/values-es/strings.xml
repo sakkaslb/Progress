@@ -20,4 +20,8 @@
     <!-- MAIN MENU-->
     <string name="menu_settings">Configuración</string>
     <string name="menu_signout">Cerrar Sesión</string>
+
+    <!-- SNAPSHOT MENU-->
+    <string name="snapshot_share">Compartir</string>
+    <string name="snapshot_pickimages">Escoge tus imagenes</string>
 </resources>
