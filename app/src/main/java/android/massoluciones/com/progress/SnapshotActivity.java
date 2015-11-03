@@ -41,6 +41,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Integer height, width;
     Integer bandera=0;
     Button btnPick;
+    View view_instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -48,11 +49,9 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_snapshot);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        View view_instance = findViewById(R.id.layout_snapshot);
+        view_instance= findViewById(R.id.layout_snapshot_interno);
         resultado=(ImageView) findViewById(R.id.imgResultado);
         btnPick=(Button) findViewById(R.id.btnSnapshot_Share);
-        height=((view_instance.getHeight())/3)*2;
-        width=(view_instance.getWidth()/2);
         img=(ImageView) findViewById(R.id.imgSnapshot);
         imgpicked=(ImageView) findViewById(R.id.imgPicked);
         imgpicked.setOnClickListener(this);
@@ -88,8 +87,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                         mPhoto = BitmapFactory.decodeFile(mUri.getPath(), options);
                         Matrix matrix = new Matrix();
                         matrix.postRotate(90);
-                        Log.i("STEFANIE", String.valueOf(mPhoto.getHeight()));
-                        Log.i("STEFANIE", String.valueOf(mPhoto.getWidth()));
                         fotoTomada = Bitmap.createBitmap(mPhoto, 0, 0,
                                 mPhoto.getWidth(), mPhoto.getHeight(),
                                 matrix, true);
@@ -159,8 +156,10 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.btnSnapshot_Share:{
+                height=view_instance.getHeight();
+                width=view_instance.getWidth();
                 if (bandera>=2){
-                    Bitmap mergedImages = combineImages(fotoTomada, fotoSeleccionada);
+                    Bitmap mergedImages = combineImages(fotoTomada, fotoSeleccionada,width,height);
                     fotoSeleccionada.recycle();
                     fotoTomada.recycle();
                     img.setVisibility(View.GONE);
@@ -174,19 +173,13 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             }
         }
     }
-    public Bitmap combineImages(Bitmap c, Bitmap s) { // can add a 3rd parameter 'String loc' if you want to save the new image - left some code to do that at the bottom
+    public Bitmap combineImages(Bitmap pc, Bitmap ps, Integer pwidth, Integer pheight) {
         Bitmap cs = null;
-
         int width, height = 0;
-
-        if(c.getWidth() > s.getWidth()) {
-            width = c.getWidth();
-            height = c.getHeight() + s.getHeight();
-        } else {
-            width = s.getWidth();
-            height = c.getHeight() + s.getHeight();
-        }
-
+        width = pwidth;
+        height = pheight;
+        Bitmap c=getResizedBitmap(pc,width/2,(height/7)*6);
+        Bitmap s=getResizedBitmap(ps,width/2,(height/7)*6);
         cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas comboImage = new Canvas(cs);
@@ -203,5 +196,22 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             Log.e("combineImages", "problem combining images", e);
         }
         return cs;
+    }
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+
+        bm.recycle();
+        return resizedBitmap;
     }
 }
