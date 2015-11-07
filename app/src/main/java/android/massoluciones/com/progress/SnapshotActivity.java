@@ -35,7 +35,7 @@ import java.util.Date;
  */
 public class SnapshotActivity extends Activity implements View.OnClickListener{
 
-    ImageView img, imgpicked, resultado;
+    ImageView img, imgpicked;
     private Uri mUri;
     Bitmap mPhoto, yourSelectedImage, fotoTomada, fotoSeleccionada;
     Integer height, width;
@@ -50,7 +50,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         view_instance= findViewById(R.id.layout_snapshot_interno);
-        resultado=(ImageView) findViewById(R.id.imgResultado);
         btnPick=(Button) findViewById(R.id.btnSnapshot_Share);
         img=(ImageView) findViewById(R.id.imgSnapshot);
         imgpicked=(ImageView) findViewById(R.id.imgPicked);
@@ -159,12 +158,14 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 height=view_instance.getHeight();
                 width=view_instance.getWidth();
                 if (bandera>=2){
-                    Bitmap mergedImages = combineImages(fotoTomada, fotoSeleccionada,width,height);
+                    String mediaPath = combineImages(fotoTomada, fotoSeleccionada,width,height);
                     fotoSeleccionada.recycle();
                     fotoTomada.recycle();
                     img.setVisibility(View.GONE);
                     imgpicked.setVisibility(View.GONE);
-                    resultado.setImageBitmap(mergedImages);
+                    String type = "image/*";
+                    createInstagramIntent(type, mediaPath);
+
 
                 }else{
                     Toast.makeText(this, R.string.snapshot_pickimages,Toast.LENGTH_LONG).show();
@@ -173,7 +174,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             }
         }
     }
-    public Bitmap combineImages(Bitmap pc, Bitmap ps, Integer pwidth, Integer pheight) {
+    public String combineImages(Bitmap pc, Bitmap ps, Integer pwidth, Integer pheight) {
         Bitmap cs = null;
         int width, height = 0;
         width = pwidth;
@@ -187,15 +188,16 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         comboImage.drawBitmap(s, 0f, 0f, null);
         comboImage.drawBitmap(c, s.getWidth(), 0f, null);
         String tmpImg = String.valueOf(System.currentTimeMillis()) + ".jpg";
-
+        String path="";
         OutputStream os = null;
         try {
             os = new FileOutputStream( Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg);
+            path= Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg;
             cs.compress(Bitmap.CompressFormat.JPEG,100 , os);
         } catch(IOException e) {
-            Log.e("combineImages", "problem combining images", e);
+            Log.e("CombineImages", "Problem combining images", e);
         }
-        return cs;
+        return path;
     }
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
@@ -213,5 +215,23 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
 
         bm.recycle();
         return resizedBitmap;
+    }
+    public void createInstagramIntent(String type, String mediaPath){
+
+        // Create the new Intent using the 'Send' action.
+        Intent share = new Intent(Intent.ACTION_SEND);
+
+        // Set the MIME type
+        share.setType(type);
+
+        // Create the URI from the media
+        File media = new File(mediaPath);
+        Uri uri = Uri.fromFile(media);
+
+        // Add the URI to the Intent.
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+
+        // Broadcast the Intent.
+        startActivity(Intent.createChooser(share,getResources().getString(R.string.snapshot_share)));
     }
 }

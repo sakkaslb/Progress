@@ -26,4 +26,5 @@
     <!-- SNAPSHOT MENU-->
     <string name="snapshot_share">Share</string>
     <string name="snapshot_pickimages">Pick your images</string>
+
 </resources>
