@@ -4,6 +4,8 @@
     <string name="app_name">Progress</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
 
     <!-- REGISTER FORM-->
     <string name="register_Name">Name</string>
@@ -30,7 +32,12 @@
 
     <!-- SNAPSHOT MENU-->
     <string name="snapshot_share">Share</string>
-    <string name="snapshot_save">Save pic!</string>
+    <string name="snapshot_new">New photo</string>
+    <string name="snapshot_save">Save photo</string>
+    <string name="snapshot_saved">Photo saved.</string>
+    <string name="snapshot_notsaved">Save your photo first.</string>
     <string name="snapshot_pickimages">Pick your images</string>
-
-</resources>
+    <string name="snapshot_menu">Take new snapshot</string>
+    <string name="snapshot_menu_question">Are you sure you want to take another snapshot?</string>
+    <string name="snapshot_cancel_after">Action cancelled.</string>
+ </resources>

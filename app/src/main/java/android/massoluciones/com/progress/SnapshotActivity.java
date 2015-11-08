@@ -1,7 +1,8 @@
 package android.massoluciones.com.progress;
 
 import android.app.Activity;
-import android.content.ContentResolver;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -16,15 +17,18 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.DialogPreference;
 import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,8 +47,9 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Bitmap mPhoto, yourSelectedImage, fotoTomada, fotoSeleccionada;
     Integer height, width;
     Integer bandera=0;
-    Button btnPick;
+    Button btnPick, btnNew, btnSave;
     View view_instance;
+    String mediaPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -54,13 +59,25 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         view_instance= findViewById(R.id.layout_snapshot_interno);
         btnPick=(Button) findViewById(R.id.btnSnapshot_Share);
+        btnNew=(Button) findViewById(R.id.btnSnapshot_New);
+        btnSave=(Button) findViewById(R.id.btnSnapshot_Save);
         img=(ImageView) findViewById(R.id.imgSnapshot);
         imgpicked=(ImageView) findViewById(R.id.imgPicked);
         imgpicked.setOnClickListener(this);
         btnPick.setOnClickListener(this);
+        btnNew.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
         img.setOnClickListener(this);
         TakePic();
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+      return true;
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -81,7 +98,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                         ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
                         fotoTomada.compress(Bitmap.CompressFormat.JPEG,0, bmpStream);
                         img.setImageBitmap(fotoTomada);
-                        /*mPhoto.recycle();*/
                         bandera+=1;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -115,7 +131,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
 
 
                 }
-
                 break;
             }
         }
@@ -128,6 +143,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
+
         }
         return true;
     }
@@ -144,16 +160,21 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.btnSnapshot_Share:{
-                height=view_instance.getHeight();
-                width=view_instance.getWidth();
-                if (bandera>=2){
-                    String mediaPath = combineImages(fotoTomada, fotoSeleccionada,width,height);
-                  /*  fotoSeleccionada.recycle();
-                    fotoTomada.recycle();*/
+
+                if (bandera>=2 && mediaPath!=null && mediaPath.length()>0){
                     String type = "image/*";
                     createInstagramIntent(type, mediaPath);
-
-
+                }else{
+                    Toast.makeText(this, R.string.snapshot_notsaved,Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            case R.id.btnSnapshot_Save:{
+                height=view_instance.getHeight();
+                width=view_instance.getWidth();
+                if (bandera>=2 &&fotoTomada!=null &&fotoSeleccionada!=null) {
+                    mediaPath = combineImages(fotoTomada, fotoSeleccionada, width, height);
+                    Toast.makeText(this, R.string.snapshot_saved,Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(this, R.string.snapshot_pickimages,Toast.LENGTH_LONG).show();
                 }
@@ -162,6 +183,41 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             case R.id.imgSnapshot:{
                 TakePic();
                 break;
+            }
+            case R.id.btnSnapshot_New:{
+                    AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                    dialog.setTitle(getResources().getText(R.string.app_name));
+                    dialog.setMessage(getResources().getText(R.string.snapshot_menu_question));
+                    dialog.setCancelable(false);
+                    dialog.setPositiveButton(getResources().getText(R.string.action_ok),new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                             if (mPhoto!=null){
+                                 mPhoto.recycle();
+                             }
+                            if (yourSelectedImage!=null){
+                                yourSelectedImage.recycle();
+                            }
+                            if (fotoSeleccionada!=null){
+                                fotoSeleccionada.recycle();
+                            }
+                            if (fotoTomada!=null){
+                                fotoTomada.recycle();
+                            }
+                            img.setImageDrawable(getResources().getDrawable(R.drawable.ic_snapshot_take));
+                            imgpicked.setImageDrawable(getResources().getDrawable(R.drawable.ic_snapshot_find));
+                            bandera=0;
+                            TakePic();
+                        }
+                    });
+                    dialog.setNegativeButton(getResources().getText(R.string.action_cancel),new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    dialog.show();
+                    break;
             }
         }
     }

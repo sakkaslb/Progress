@@ -11,7 +11,16 @@
         <item name="android:textColor">@color/icons</item>
         <item name="android:textSize">@dimen/size12dp</item>
         <item name="android:paddingStart">@dimen/size5dp</item>
-        <item name="android:layout_margin">@dimen/size25dp</item>
+        <item name="android:layout_margin">@dimen/size5dp</item>
+        <item name="android:layout_marginTop">@dimen/size35dp</item>
+
+    </style>
+    <style name="button2">
+        <item name="android:background">@color/divider</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textSize">@dimen/size12dp</item>
+        <item name="android:paddingStart">@dimen/size5dp</item>
+        <item name="android:layout_margin">@dimen/size5dp</item>
         <item name="android:layout_marginTop">@dimen/size35dp</item>
 
     </style>
@@ -50,4 +59,6 @@
     <style name="Theme.MyFancyTheme" parent="android:Theme.Holo.Light">
         <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
     </style>
+
+
 </resources>
