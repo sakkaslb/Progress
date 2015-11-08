@@ -7,7 +7,12 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,9 +35,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Stefanie on 17/10/2015.
- */
+
 public class SnapshotActivity extends Activity implements View.OnClickListener{
 
     ImageView img, imgpicked;
@@ -55,20 +58,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         imgpicked=(ImageView) findViewById(R.id.imgPicked);
         imgpicked.setOnClickListener(this);
         btnPick.setOnClickListener(this);
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            File pdfFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress");
-            if (!pdfFolder.exists()) {
-                pdfFolder.mkdirs();
-            }
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            File f = new File(pdfFolder,  "progress_"+timeStamp+".jpg");
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-            mUri = Uri.fromFile(f);
-            startActivityForResult(intent,0);
-        }
-
-
+        img.setOnClickListener(this);
+        TakePic();
     }
 
     @Override
@@ -78,8 +69,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             case 0:{
                 if (resultCode == Activity.RESULT_OK) {
                     getContentResolver().notifyChange(mUri, null);
-                    ContentResolver cr = getContentResolver();
-
                     try {
                         BitmapFactory.Options options = new BitmapFactory.Options();
                         options.inSampleSize = 4;
@@ -92,7 +81,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                         ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
                         fotoTomada.compress(Bitmap.CompressFormat.JPEG,0, bmpStream);
                         img.setImageBitmap(fotoTomada);
-                        mPhoto.recycle();
+                        /*mPhoto.recycle();*/
                         bandera+=1;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -118,7 +107,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     fotoSeleccionada = Bitmap.createBitmap(yourSelectedImage, 0, 0,
                             yourSelectedImage.getWidth(), yourSelectedImage.getHeight(),
                             matrix, true);
-                    yourSelectedImage.recycle();
+                    /*yourSelectedImage.recycle();*/
                     ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
                     fotoSeleccionada.compress(Bitmap.CompressFormat.JPEG,0,bmpStream);
                     imgpicked.setImageBitmap(fotoSeleccionada);
@@ -159,10 +148,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 width=view_instance.getWidth();
                 if (bandera>=2){
                     String mediaPath = combineImages(fotoTomada, fotoSeleccionada,width,height);
-                    fotoSeleccionada.recycle();
-                    fotoTomada.recycle();
-                    img.setVisibility(View.GONE);
-                    imgpicked.setVisibility(View.GONE);
+                  /*  fotoSeleccionada.recycle();
+                    fotoTomada.recycle();*/
                     String type = "image/*";
                     createInstagramIntent(type, mediaPath);
 
@@ -172,6 +159,24 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 }
                 break;
             }
+            case R.id.imgSnapshot:{
+                TakePic();
+                break;
+            }
+        }
+    }
+    public void TakePic(){
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            File pdfFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress");
+            if (!pdfFolder.exists()) {
+                pdfFolder.mkdirs();
+            }
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            File f = new File(pdfFolder,  "progress_"+timeStamp+".jpg");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+            mUri = Uri.fromFile(f);
+            startActivityForResult(intent,0);
         }
     }
     public String combineImages(Bitmap pc, Bitmap ps, Integer pwidth, Integer pheight) {
@@ -187,10 +192,58 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
 
         comboImage.drawBitmap(s, 0f, 0f, null);
         comboImage.drawBitmap(c, s.getWidth(), 0f, null);
+
+        Drawable d = getResources().getDrawable(R.drawable.ic_launcher);
+        d.setBounds(0, 0, 50, 50);
+        d.draw(comboImage);
+
+        String captionString = "-31 libras";
+        String caption1="Jun/15";
+        String caption2="Oct/15";
+        Typeface plain = Typeface.createFromAsset(getAssets(), "fonts/LeagueSpartan.otf");
+        Typeface bold = Typeface.create(plain, Typeface.BOLD);
+        Paint paintText = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        if(captionString != null) {
+            paintText.setColor(getResources().getColor(R.color.primary));
+            paintText.setTextSize(50);
+            paintText.setStyle(Paint.Style.FILL);
+            paintText.setShadowLayer(10f, 10f, 10f, Color.BLACK);
+            paintText.setTypeface(bold);
+            Rect rectText = new Rect();
+            paintText.getTextBounds(captionString, 0, captionString.length(), rectText);
+            comboImage.drawText(captionString,
+                    160, rectText.height(), paintText);
+            }
+
+        if(caption1 != null) {
+            paintText.setColor(getResources().getColor(R.color.accent));
+            paintText.setTextSize(25);
+            paintText.setStyle(Paint.Style.FILL);
+            paintText.setShadowLayer(10f, 10f, 10f, Color.BLACK);
+            paintText.setTypeface(bold);
+            Rect rectText = new Rect();
+            paintText.getTextBounds(caption1, 0, caption1.length(), rectText);
+            comboImage.drawText(caption1,
+                    70, 500, paintText);
+        }
+
+        if(caption2 != null) {
+            paintText.setColor(getResources().getColor(R.color.accent));
+            paintText.setTextSize(25);
+            paintText.setStyle(Paint.Style.FILL);
+            paintText.setShadowLayer(10f, 10f, 10f, Color.BLACK);
+            paintText.setTypeface(bold);
+            Rect rectText = new Rect();
+            paintText.getTextBounds(caption2, 0, caption2.length(), rectText);
+            comboImage.drawText(caption2,
+                    370, 500, paintText);
+        }
         String tmpImg = String.valueOf(System.currentTimeMillis()) + ".jpg";
         String path="";
         OutputStream os = null;
         try {
+
             os = new FileOutputStream( Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg);
             path= Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg;
             cs.compress(Bitmap.CompressFormat.JPEG,100 , os);
@@ -213,7 +266,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
 
-        bm.recycle();
+        /*bm.recycle();*/
         return resizedBitmap;
     }
     public void createInstagramIntent(String type, String mediaPath){
@@ -230,7 +283,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
 
         // Add the URI to the Intent.
         share.putExtra(Intent.EXTRA_STREAM, uri);
-
         // Broadcast the Intent.
         startActivity(Intent.createChooser(share,getResources().getString(R.string.snapshot_share)));
     }

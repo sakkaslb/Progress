@@ -22,9 +22,15 @@
     <!-- MAIN MENU-->
     <string name="menu_settings">Settings</string>
     <string name="menu_signout">Sign Out</string>
+    <string name="menu_goals">Goals</string>
+    <string name="menu_snapshot">Snapshot</string>
+    <string name="menu_progress">Progress</string>
+    <string name="menu_social">Social</string>
+    <string name="menu_memory">Memory Lane</string>
 
     <!-- SNAPSHOT MENU-->
     <string name="snapshot_share">Share</string>
+    <string name="snapshot_save">Save pic!</string>
     <string name="snapshot_pickimages">Pick your images</string>
 
 </resources>

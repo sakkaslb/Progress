@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#ff000000"
+    android:background="@color/primary_text"
     tools:context=".SnapshotActivity"
     android:id="@+id/layout_snapshot"
     android:parentActivityName="android.massoluciones.com.progress.MainActivity">
@@ -23,30 +23,34 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/imgSnapshot"
-                android:src="@drawable/modeloskinny"
-                android:background="@color/accent"
-                android:layout_weight="1"
-                />
+                android:id="@+id/imgPicked"
+                android:src="@drawable/ic_snapshot_find"
+                android:background="@color/primary_text"
+                android:layout_weight="1"/>
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/imgPicked"
-                android:src="@drawable/ic_back"
-                android:background="@color/accent"
-                android:layout_weight="1"/>
+                android:id="@+id/imgSnapshot"
+                android:src="@drawable/ic_snapshot_take"
+                android:background="@color/primary_text"
+                android:layout_weight="1"
+                />
+
+
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="3">
+
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/snapshot_share"
+                style="@style/button"
                 android:id="@+id/btnSnapshot_Share" />
         </LinearLayout>
     </LinearLayout>

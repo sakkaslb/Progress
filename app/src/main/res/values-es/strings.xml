@@ -20,8 +20,14 @@
     <!-- MAIN MENU-->
     <string name="menu_settings">Configuración</string>
     <string name="menu_signout">Cerrar Sesión</string>
+    <string name="menu_goals">Objetivos</string>
+    <string name="menu_snapshot">Snapshot</string>
+    <string name="menu_progress">Progreso</string>
+    <string name="menu_social">Social</string>
+    <string name="menu_memory">Línea de Tiempo</string>
 
     <!-- SNAPSHOT MENU-->
     <string name="snapshot_share">Compartir</string>
-    <string name="snapshot_pickimages">Escoge tus imagenes</string>
+    <string name="snapshot_save">Guardar imagen</string>
+    <string name="snapshot_pickimages">Escoge tus imágenes</string>
 </resources>

@@ -61,31 +61,31 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.menu_btnGoals:{
-                Toast.makeText(this,"GOALS", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getText(R.string.menu_goals), Toast.LENGTH_SHORT).show();
                 Intent vintent=new Intent(this,GoalsActivity.class);
                 startActivity(vintent);
                 break;
             }
             case R.id.menu_btnMemoryLane:{
-                Toast.makeText(this,"MEMORY LANE", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getText(R.string.menu_memory), Toast.LENGTH_SHORT).show();
                 Intent vintent=new Intent(this, MemoryActivity.class);
                 startActivity(vintent);
                 break;
             }
             case R.id.menu_btnProgress:{
-                Toast.makeText(this,"PROGRESS", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getText(R.string.menu_progress), Toast.LENGTH_SHORT).show();
                 Intent vintent=new Intent(this,ProgressActivity.class);
                 startActivity(vintent);
                 break;
             }
             case R.id.menu_btnSnapshot:{
-                Toast.makeText(this,"SNAPSHOT", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getText(R.string.menu_snapshot), Toast.LENGTH_SHORT).show();
                 Intent vintent=new Intent(this, SnapshotActivity.class);
                 startActivity(vintent);
                 break;
             }
             case R.id.menu_btnSocial:{
-                Toast.makeText(this,"SOCIAL", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getText(R.string.menu_social), Toast.LENGTH_SHORT).show();
                 Intent vintent=new Intent(this, SocialActivity.class);
                 startActivity(vintent);
                 break;
