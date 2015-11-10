@@ -80,8 +80,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
             case R.id.menu_btnSnapshot:{
                 Toast.makeText(this,getResources().getText(R.string.menu_snapshot), Toast.LENGTH_SHORT).show();
-                Intent vintent=new Intent(this, SnapshotActivity.class);
+                Intent vintent=new Intent(this, WeightActivity.class);
                 startActivity(vintent);
+
                 break;
             }
             case R.id.menu_btnSocial:{

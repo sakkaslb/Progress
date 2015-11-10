@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#000000"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".WeightActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imgWeightWatch"
+        android:src="@drawable/ic_weightcheckin"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/weight_enter"
+                android:id="@+id/lblWeightWatch"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/size35dp"
+                android:textColor="@color/primary_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/txtWeight"
+                    android:layout_gravity="right"
+                    android:hint="0"
+                    android:layout_marginLeft="@dimen/size35dp"
+                    android:layout_marginTop="@dimen/size50dp"
+                    android:numeric="decimal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2">
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cmbMeasure"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="@dimen/size35dp"
+                    android:layout_marginTop="@dimen/size50dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            >
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/weight_btn"
+                android:id="@+id/btnWeightCheck"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/size35dp"
+                style="@style/button2"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -50,6 +50,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Button btnPick, btnNew, btnSave;
     View view_instance;
     String mediaPath;
+    Double weight=0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -57,6 +58,12 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_snapshot);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        Bundle b=getIntent().getExtras();
+        if (b!=null){
+            weight=b.getDouble("peso");
+            Log.i("PESO",weight.toString());
+        }
+
         view_instance= findViewById(R.id.layout_snapshot_interno);
         btnPick=(Button) findViewById(R.id.btnSnapshot_Share);
         btnNew=(Button) findViewById(R.id.btnSnapshot_New);
@@ -206,8 +213,12 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                             }
                             img.setImageDrawable(getResources().getDrawable(R.drawable.ic_snapshot_take));
                             imgpicked.setImageDrawable(getResources().getDrawable(R.drawable.ic_snapshot_find));
-                            bandera=0;
-                            TakePic();
+                          //  bandera=0;
+                          //  TakePic();
+                            Intent vintent=new Intent().setClass(SnapshotActivity.this,WeightActivity.class);
+                            startActivity(vintent);
+                            finish();
+
                         }
                     });
                     dialog.setNegativeButton(getResources().getText(R.string.action_cancel),new DialogInterface.OnClickListener() {

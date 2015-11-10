@@ -40,4 +40,13 @@
     <string name="snapshot_menu">Take new snapshot</string>
     <string name="snapshot_menu_question">Are you sure you want to take another snapshot?</string>
     <string name="snapshot_cancel_after">Action cancelled.</string>
+
+    <!--WEIGHT WATCH-->
+    <string name="weight_enter">Enter your current weight</string>
+    <string-array name="list_measure">
+        <item>lbs</item>
+        <item>kg</item>
+    </string-array>
+    <string name="weight_btn">Check-in!</string>
+    <string name="weight_validation">Incorrect weight.</string>
  </resources>

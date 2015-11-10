@@ -38,4 +38,13 @@
     <string name="snapshot_menu">Tomar otra snapshot</string>
     <string name="snapshot_menu_question">¿Deseas tomar otra foto?</string>
     <string name="snapshot_cancel_after">Acción cancelada.</string>
+
+    <!--WEIGHT WATCH-->
+    <string name="weight_enter">Ingresa tu peso actual:</string>
+    <array name="list_measure">
+        <item>lbs</item>
+        <item>kg</item>
+    </array>
+    <string name="weight_btn">Marcar!</string>
+    <string name="weight_validation">Peso incorrecto.</string>
 </resources>
