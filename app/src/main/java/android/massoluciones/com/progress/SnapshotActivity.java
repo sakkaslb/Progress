@@ -50,7 +50,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Button btnPick, btnNew, btnSave;
     View view_instance;
     String mediaPath;
-    Double weight=0.0;
+    Integer weight=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -58,9 +58,9 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_snapshot);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        Bundle b=getIntent().getExtras();
+        Bundle b=this.getIntent().getExtras();
         if (b!=null){
-            weight=b.getDouble("peso");
+            weight=b.getInt("peso");
             Log.i("PESO",weight.toString());
         }
 
@@ -182,7 +182,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 if (bandera>=2 &&fotoTomada!=null &&fotoSeleccionada!=null) {
                     mediaPath = combineImages(fotoTomada, fotoSeleccionada, width, height);
                     Toast.makeText(this, R.string.snapshot_saved,Toast.LENGTH_LONG).show();
-                }else{
+                }
+                else {
                     Toast.makeText(this, R.string.snapshot_pickimages,Toast.LENGTH_LONG).show();
                 }
                 break;

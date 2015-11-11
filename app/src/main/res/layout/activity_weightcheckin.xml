@@ -59,7 +59,7 @@
                     android:hint="0"
                     android:layout_marginLeft="@dimen/size35dp"
                     android:layout_marginTop="@dimen/size50dp"
-                    android:numeric="decimal" />
+                    android:numeric="integer" />
 
             </LinearLayout>
 

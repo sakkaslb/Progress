@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,15 +12,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-/**
- * Created by Stefanie on 09/11/2015.
- */
 
 public class WeightActivity extends Activity {
     EditText txtWeight;
     Spinner cmbMeasure;
     Button btnWeight;
-    Double weight;
+    Integer weight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +32,12 @@ public class WeightActivity extends Activity {
         btnWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                weight=Double.parseDouble(txtWeight.getText().toString());
+                weight=Integer.parseInt(txtWeight.getText().toString());
                 if (weight!=null && weight>0 &&weight<600){
                     Intent vintent=new Intent().setClass(WeightActivity.this,SnapshotActivity.class);
-                    vintent.putExtra("peso",txtWeight.getText().toString());
+                    Bundle b=new Bundle();
+                    b.putInt("peso",weight);
+                    vintent.putExtras(b);
                     startActivity(vintent);
                 } else {
                     Toast.makeText(WeightActivity.this,getResources().getString(R.string.weight_validation),Toast.LENGTH_LONG).show();
