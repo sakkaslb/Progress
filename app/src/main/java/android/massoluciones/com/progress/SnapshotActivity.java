@@ -2,9 +2,12 @@ package android.massoluciones.com.progress;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,6 +18,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.DialogPreference;
@@ -37,6 +41,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -49,7 +54,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Integer bandera=0;
     Button btnPick, btnNew, btnSave;
     View view_instance;
-    String mediaPath;
+    String mediaPath, urifotoTomada, urifotoSeleccionada;
     Integer weight=0;
 
     @Override
@@ -61,7 +66,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         Bundle b=this.getIntent().getExtras();
         if (b!=null){
             weight=b.getInt("peso");
-            Log.i("PESO",weight.toString());
         }
 
         view_instance= findViewById(R.id.layout_snapshot_interno);
@@ -116,6 +120,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             case 1:{
                 if (resultCode==Activity.RESULT_OK){
                     Uri selectedImage = data.getData();
+                    urifotoSeleccionada=selectedImage.getPath();
+                    Log.i("FOTO SELECCIONADA", urifotoSeleccionada);
                     InputStream imageStream = null;
                     try {
                         imageStream = getContentResolver().openInputStream(selectedImage);
@@ -130,7 +136,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     fotoSeleccionada = Bitmap.createBitmap(yourSelectedImage, 0, 0,
                             yourSelectedImage.getWidth(), yourSelectedImage.getHeight(),
                             matrix, true);
-                    /*yourSelectedImage.recycle();*/
                     ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
                     fotoSeleccionada.compress(Bitmap.CompressFormat.JPEG,0,bmpStream);
                     imgpicked.setImageBitmap(fotoSeleccionada);
@@ -193,6 +198,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 break;
             }
             case R.id.btnSnapshot_New:{
+                    urifotoSeleccionada="";
+                    urifotoTomada="";
                     AlertDialog.Builder dialog=new AlertDialog.Builder(this);
                     dialog.setTitle(getResources().getText(R.string.app_name));
                     dialog.setMessage(getResources().getText(R.string.snapshot_menu_question));
@@ -214,8 +221,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                             }
                             img.setImageDrawable(getResources().getDrawable(R.drawable.ic_snapshot_take));
                             imgpicked.setImageDrawable(getResources().getDrawable(R.drawable.ic_snapshot_find));
-                          //  bandera=0;
-                          //  TakePic();
                             Intent vintent=new Intent().setClass(SnapshotActivity.this,WeightActivity.class);
                             startActivity(vintent);
                             finish();
@@ -243,6 +248,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             File f = new File(pdfFolder,  "progress_"+timeStamp+".jpg");
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+            urifotoTomada=Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/progress_"+timeStamp+".jpg";
+            Log.i("FOTO TOMADA", urifotoTomada);
             mUri = Uri.fromFile(f);
             startActivityForResult(intent,0);
         }
@@ -307,13 +314,17 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             comboImage.drawText(caption2,
                     370, 500, paintText);
         }
-        String tmpImg = String.valueOf(System.currentTimeMillis()) + ".jpg";
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String tmpImg ="progress_combined_"+timeStamp + ".jpg";
         String path="";
         OutputStream os = null;
         try {
-
-            os = new FileOutputStream( Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg);
-            path= Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/"+ tmpImg;
+            File pdfFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/progresscombined");
+            if (!pdfFolder.exists()) {
+                pdfFolder.mkdirs();
+            }
+            os = new FileOutputStream( Environment.getExternalStorageDirectory().getAbsolutePath()+"/progresscombined/"+ tmpImg);
+            path= Environment.getExternalStorageDirectory().getAbsolutePath()+"/progresscombined/"+ tmpImg;
             cs.compress(Bitmap.CompressFormat.JPEG,100 , os);
         } catch(IOException e) {
             Log.e("CombineImages", "Problem combining images", e);
@@ -334,7 +345,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
 
-        /*bm.recycle();*/
         return resizedBitmap;
     }
     public void createInstagramIntent(String type, String mediaPath){
@@ -355,3 +365,47 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         startActivity(Intent.createChooser(share,getResources().getString(R.string.snapshot_share)));
     }
 }
+
+ class InsertarCheckIn extends AsyncTask<Void, Integer, Boolean>
+ {
+     Context contexto;
+     String uri, fecha;
+     Integer peso;
+     Boolean resultado=false;
+     InsertarCheckIn(Context context, String uri, Integer peso) {
+         this.contexto=context;
+         this.uri=uri;
+         this.peso=peso;
+     }
+
+     @Override
+     protected Boolean doInBackground(Void... voids) {
+         Calendar calendar = Calendar.getInstance();
+         fecha=new SimpleDateFormat("yyyyMMdd_HHmmss").format(calendar.getTime());
+         USQLiteHelper sql=new USQLiteHelper(contexto,"DBprogress", null,1);
+         SQLiteDatabase db=sql.getWritableDatabase();
+         ContentValues content=new ContentValues();
+         content.put("foto",uri);
+         content.put("fecha",fecha);
+         content.put("peso",peso);
+         try{
+             db.insert("CHECKIN",null,content);
+             resultado=true;
+         }catch (Exception e){
+             e.printStackTrace();
+         } finally {
+             db.close();
+         }
+         return resultado;
+     }
+
+     @Override
+     protected void onPreExecute() {
+         super.onPreExecute();
+     }
+
+     @Override
+     protected void onPostExecute(Boolean aBoolean) {
+         super.onPostExecute(aBoolean);
+     }
+ }
