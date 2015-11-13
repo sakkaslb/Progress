@@ -49,4 +49,5 @@
     </string-array>
     <string name="weight_btn">Check-in!</string>
     <string name="weight_validation">Incorrect weight.</string>
+
  </resources>

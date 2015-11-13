@@ -187,6 +187,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 if (bandera>=2 &&fotoTomada!=null &&fotoSeleccionada!=null) {
                     mediaPath = combineImages(fotoTomada, fotoSeleccionada, width, height);
                     Toast.makeText(this, R.string.snapshot_saved,Toast.LENGTH_LONG).show();
+                    btnSave.setEnabled(false);
                 }
                 else {
                     Toast.makeText(this, R.string.snapshot_pickimages,Toast.LENGTH_LONG).show();
@@ -200,6 +201,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             case R.id.btnSnapshot_New:{
                     urifotoSeleccionada="";
                     urifotoTomada="";
+                    btnSave.setEnabled(true);
                     AlertDialog.Builder dialog=new AlertDialog.Builder(this);
                     dialog.setTitle(getResources().getText(R.string.app_name));
                     dialog.setMessage(getResources().getText(R.string.snapshot_menu_question));
@@ -262,6 +264,10 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         Bitmap c=getResizedBitmap(pc,width/2,(height/7)*6);
         Bitmap s=getResizedBitmap(ps,width/2,(height/7)*6);
         cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        //DATABASE FUNCTIONS
+        new InsertarCheckIn(this,urifotoTomada,weight).execute();
+
 
         Canvas comboImage = new Canvas(cs);
 

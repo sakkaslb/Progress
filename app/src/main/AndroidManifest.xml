@@ -24,6 +24,7 @@
         <activity android:name=".SocialActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
         <activity android:name=".SnapshotActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
         <activity android:name=".WeightActivity" android:label="Progress"    android:theme="@style/Theme.FloatingWindow.Popup"/>
+        <activity android:name=".ListadoCheckinsActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".SnapshotActivity"/>
     </application>
 
 </manifest>
