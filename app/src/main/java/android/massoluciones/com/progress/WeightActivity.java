@@ -39,6 +39,7 @@ public class WeightActivity extends Activity {
                     b.putInt("peso",weight);
                     vintent.putExtras(b);
                     startActivity(vintent);
+                    finish();
                 } else {
                     Toast.makeText(WeightActivity.this,getResources().getString(R.string.weight_validation),Toast.LENGTH_LONG).show();
                 }

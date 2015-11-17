@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,9 +41,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 
 public class SnapshotActivity extends Activity implements View.OnClickListener{
@@ -55,7 +58,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Button btnPick, btnNew, btnSave;
     View view_instance;
     String mediaPath, urifotoTomada, urifotoSeleccionada;
-    Integer weight=0;
+    Integer weight=0, difference=0;
+    CheckIn lastcheckin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -110,6 +114,17 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                         fotoTomada.compress(Bitmap.CompressFormat.JPEG,0, bmpStream);
                         img.setImageBitmap(fotoTomada);
                         bandera+=1;
+
+                        //DATABASE FUNCTIONS
+                        lastcheckin=new ConsultarCheckIn(this).execute().get();
+                        //NO ES LA PRIMERA VEZ QUE TE CHEQUEAS
+                        if(lastcheckin.getPeso()>0){
+                            new InsertarCheckIn(this,urifotoTomada,weight).execute();
+                        }else{
+                            new InsertarCheckIn(this,urifotoTomada,weight).execute();
+                            Toast.makeText(this,R.string.snapshot_saved,Toast.LENGTH_LONG);
+                            finish();
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -185,7 +200,13 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 height=view_instance.getHeight();
                 width=view_instance.getWidth();
                 if (bandera>=2 &&fotoTomada!=null &&fotoSeleccionada!=null) {
-                    mediaPath = combineImages(fotoTomada, fotoSeleccionada, width, height);
+                    try {
+                        mediaPath = combineImages(fotoTomada, fotoSeleccionada, width, height);
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     Toast.makeText(this, R.string.snapshot_saved,Toast.LENGTH_LONG).show();
                     btnSave.setEnabled(false);
                 }
@@ -256,7 +277,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             startActivityForResult(intent,0);
         }
     }
-    public String combineImages(Bitmap pc, Bitmap ps, Integer pwidth, Integer pheight) {
+    public String combineImages(Bitmap pc, Bitmap ps, Integer pwidth, Integer pheight) throws ExecutionException, InterruptedException {
         Bitmap cs = null;
         int width, height = 0;
         width = pwidth;
@@ -264,10 +285,6 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         Bitmap c=getResizedBitmap(pc,width/2,(height/7)*6);
         Bitmap s=getResizedBitmap(ps,width/2,(height/7)*6);
         cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-        //DATABASE FUNCTIONS
-        new InsertarCheckIn(this,urifotoTomada,weight).execute();
-
 
         Canvas comboImage = new Canvas(cs);
 
@@ -277,10 +294,15 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         Drawable d = getResources().getDrawable(R.drawable.ic_launcher);
         d.setBounds(0, 0, 50, 50);
         d.draw(comboImage);
-
-        String captionString = "-31 libras";
-        String caption1="Jun/15";
-        String caption2="Oct/15";
+        difference=lastcheckin.getPeso()-weight;
+        String captionString =difference+" libras"; //SHARED PREFERENCE
+        String year=lastcheckin.getFecha().substring(2,4);
+        String month=getMonth(Integer.valueOf(lastcheckin.getFecha().toString().substring(5,7)));
+        String caption1=month.substring(1,3)+"/"+year;
+        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        year=timeStamp.substring(2,4);
+        month=getMonth(Integer.valueOf(timeStamp.substring(5,7)));
+        String caption2=month.substring(1,3)+"/"+year;
         Typeface plain = Typeface.createFromAsset(getAssets(), "fonts/LeagueSpartan.otf");
         Typeface bold = Typeface.create(plain, Typeface.BOLD);
         Paint paintText = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -320,7 +342,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             comboImage.drawText(caption2,
                     370, 500, paintText);
         }
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String tmpImg ="progress_combined_"+timeStamp + ".jpg";
         String path="";
         OutputStream os = null;
@@ -369,6 +391,53 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         share.putExtra(Intent.EXTRA_STREAM, uri);
         // Broadcast the Intent.
         startActivity(Intent.createChooser(share,getResources().getString(R.string.snapshot_share)));
+    }
+    public String getMonth(int month) {
+      //  return "Jan";
+      return new DateFormatSymbols().getMonths()[month-1];
+    }
+}
+class ConsultarCheckIn extends AsyncTask<Void, Integer, CheckIn>{
+    Context contexto;
+    ConsultarCheckIn(Context context) {
+        this.contexto=context;
+    }
+
+    @Override
+    protected CheckIn doInBackground(Void... voids) {
+        CheckIn check=new CheckIn();
+        USQLiteHelper sql=new USQLiteHelper(contexto,"DBprogress", null,1);
+        SQLiteDatabase db=sql.getWritableDatabase();
+        String query="SELECT _id, foto, fecha, peso FROM CHECKIN ORDER BY _id LIMIT 1;";
+        Cursor c=db.rawQuery(query,null);
+        if(c.moveToFirst()){
+            do{
+                check.setId(c.getInt(0));
+                check.setRuta(c.getString(1));
+                check.setFecha(c.getString(2));
+                check.setPeso(c.getInt(3));
+            }while (c.moveToNext());
+
+        }
+        else {
+            check.setId(0);
+            check.setPeso(0);
+            check.setRuta("");
+            check.setFecha("");
+        }
+        c.close();
+        db.close();
+        return check;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(CheckIn checkin) {
+        super.onPostExecute(checkin);
     }
 }
 
