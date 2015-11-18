@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     tools:context=".ListadoCheckinsActivity"
-    android:parentActivityName="android.massoluciones.com.progress.SnapshotActivity">
+    android:parentActivityName="android.massoluciones.com.progress.SnapshotActivity"
+    android:background="@color/primary_dark">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView" />
 
-    <ListView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list_fotos">
+        android:id="@+id/scrollView" >
 
-    </ListView>
-
+        <GridView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtxListadoCheckIns"
+            android:numColumns="2"/>
+    </ScrollView>
 </LinearLayout>

@@ -47,4 +47,6 @@
     </array>
     <string name="weight_btn">Marcar!</string>
     <string name="weight_validation">Peso incorrecto.</string>
+    <string name="photo_chooser">Hiciste click en </string>
+    <string name="photo_wait">Descargando imágenes...</string>
 </resources>

@@ -50,4 +50,7 @@
     <string name="weight_btn">Check-in!</string>
     <string name="weight_validation">Incorrect weight.</string>
 
+    <!--PHOTO PICKER-->
+    <string name="photo_chooser">You clicked </string>
+    <string name="photo_wait">Downloading images... </string>
  </resources>

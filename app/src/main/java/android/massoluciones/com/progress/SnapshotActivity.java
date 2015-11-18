@@ -134,6 +134,13 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             }
             case 1:{
                 if (resultCode==Activity.RESULT_OK){
+                    Intent i = getIntent();
+                    int position = i.getExtras().getInt("id");
+                    CustomAdapter adaptador=new CustomAdapter(this,"lbs");
+                    Toast.makeText(this,adaptador.checkins.get(position).getRuta(),Toast.LENGTH_LONG).show();
+                }
+
+               /* if (resultCode==Activity.RESULT_OK){
                     Uri selectedImage = data.getData();
                     urifotoSeleccionada=selectedImage.getPath();
                     Log.i("FOTO SELECCIONADA", urifotoSeleccionada);
@@ -157,7 +164,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     bandera+=1;
 
 
-                }
+                }*/
                 break;
             }
         }
@@ -179,11 +186,14 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.imgPicked:{
-                Intent intent = new Intent();
+                /*Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress");
-                intent.setDataAndType(uri, "image/*");
-                startActivityForResult(Intent.createChooser(intent, ""), 1);
+                Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/");
+                intent.setDataAndType(uri, "image/jpeg");
+                startActivityForResult(Intent.createChooser(intent, ""), 1);*/
+                Intent vintent=new Intent(this,ListadoCheckinsActivity.class);
+                startActivityForResult(vintent,1);
+
                 break;
             }
             case R.id.btnSnapshot_Share:{
@@ -408,7 +418,7 @@ class ConsultarCheckIn extends AsyncTask<Void, Integer, CheckIn>{
         CheckIn check=new CheckIn();
         USQLiteHelper sql=new USQLiteHelper(contexto,"DBprogress", null,1);
         SQLiteDatabase db=sql.getWritableDatabase();
-        String query="SELECT _id, foto, fecha, peso FROM CHECKIN ORDER BY _id LIMIT 1;";
+        String query="SELECT _id, foto, fecha, peso FROM CHECKIN ORDER BY _id DESC LIMIT 1;";
         Cursor c=db.rawQuery(query,null);
         if(c.moveToFirst()){
             do{
