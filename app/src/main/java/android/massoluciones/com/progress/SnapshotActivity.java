@@ -2,6 +2,7 @@ package android.massoluciones.com.progress;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,6 +44,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -60,7 +62,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     String mediaPath, urifotoTomada, urifotoSeleccionada;
     Integer weight=0, difference=0;
     CheckIn lastcheckin;
-
+    ArrayList<CheckIn> listado;
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -136,8 +138,14 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 if (resultCode==Activity.RESULT_OK){
                     Intent i = getIntent();
                     int position = i.getExtras().getInt("id");
-                    CustomAdapter adaptador=new CustomAdapter(this,"lbs");
-                    Toast.makeText(this,adaptador.checkins.get(position).getRuta(),Toast.LENGTH_LONG).show();
+                    try {
+                        listado=new DescargarListadoCheckIn(this).execute().get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(this,listado.get(position).getRuta(),Toast.LENGTH_LONG).show();
                 }
 
                /* if (resultCode==Activity.RESULT_OK){
@@ -494,3 +502,4 @@ class ConsultarCheckIn extends AsyncTask<Void, Integer, CheckIn>{
          super.onPostExecute(aBoolean);
      }
  }
+
