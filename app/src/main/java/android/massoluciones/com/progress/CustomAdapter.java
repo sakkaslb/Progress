@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,8 @@ public class CustomAdapter extends BaseAdapter {
             DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                     .cacheOnDisc(true).cacheInMemory(true)
                     .imageScaleType(ImageScaleType.EXACTLY)
-                    .displayer(new FadeInBitmapDisplayer(300)).build();
+                    .considerExifParams(true)
+                    .displayer(new FadeInBitmapDisplayer(300)).build();//for rounded corners
 
             ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
                     context)
@@ -87,6 +89,8 @@ public class CustomAdapter extends BaseAdapter {
                     .cacheOnDisc(true).resetViewBeforeLoading(true)
                     .showImageForEmptyUri(R.drawable.ic_launcher)
                     .showImageOnFail(R.drawable.ic_launcher)
+                    .imageScaleType(ImageScaleType.EXACTLY)
+                    .considerExifParams(true)
                     .showImageOnLoading(R.drawable.ic_launcher).build();
 
             //download and display image from url

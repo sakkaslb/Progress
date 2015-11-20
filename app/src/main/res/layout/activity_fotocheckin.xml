@@ -10,11 +10,12 @@
         android:background="@drawable/android_bg">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
             android:id="@+id/imgFotoCheckin"
             android:src="@drawable/ic_launcher"
-            android:layout_centerInParent="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,7 +24,7 @@
             android:text=""
             android:id="@+id/txtFotoPeso"
             android:layout_below="@+id/imgFotoCheckin"
-            android:layout_marginTop="@dimen/size20dp"
+            android:layout_marginTop="@dimen/size15dp"
             android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"

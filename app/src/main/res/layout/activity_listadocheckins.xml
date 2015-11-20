@@ -7,16 +7,10 @@
     android:parentActivityName="android.massoluciones.com.progress.SnapshotActivity"
     android:background="@color/primary_dark">
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
-
-        <GridView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <GridView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
             android:id="@+id/mtxListadoCheckIns"
             android:numColumns="2"/>
-    </ScrollView>
+
 </LinearLayout>
