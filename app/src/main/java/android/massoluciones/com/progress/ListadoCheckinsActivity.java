@@ -34,13 +34,13 @@ public class ListadoCheckinsActivity extends Activity {
             e.printStackTrace();
         }
         grid=(GridView)findViewById(R.id.mtxListadoCheckIns);
-        grid.setAdapter(new CustomAdapter(this, "lbs",checkIns)); //SHARED PREFERENCES
-        Log.i("ADVERTENCIA", "SI TERMINE EL SET ADAPTER");
+        grid.setAdapter(new CustomAdapter(this, "lbs", checkIns)); //SHARED PREFERENCES
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=new Intent(getApplicationContext(),SnapshotActivity.class);
-                intent.putExtra("id",i);
+                Intent intent=new Intent(ListadoCheckinsActivity.this,ListadoCheckinsActivity.class);
+                intent.putExtra("numero",i);
+                Log.i("LISTADO CHECKINS",String.valueOf(i));
                 setResult(Activity.RESULT_OK,intent);
                 finish();
             }

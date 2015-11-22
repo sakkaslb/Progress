@@ -33,7 +33,7 @@
             android:text=""
             android:id="@+id/txtFotoPesoMedida"
             android:layout_below="@+id/imgFotoCheckin"
-            android:layout_marginTop="@dimen/size20dp"
+            android:layout_marginTop="@dimen/size15dp"
             android:layout_toRightOf="@+id/txtFotoPeso"/>
         <TextView
             android:layout_width="wrap_content"

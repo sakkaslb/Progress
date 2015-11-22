@@ -35,6 +35,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,8 +68,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Button btnPick, btnNew, btnSave;
     View view_instance;
     String mediaPath, urifotoTomada, urifotoSeleccionada;
-    Integer weight=0, difference=0;
-    CheckIn lastcheckin;
+    Integer weight=0, difference=0, selectedweight=0;
+    CheckIn lastcheckin, prevcheckin;
     ArrayList<CheckIn> listado;
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -135,9 +143,9 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                 break;
             }
             case 1:{
-                if (resultCode==Activity.RESULT_OK){
-                    Intent i = getIntent();
-                    int position = i.getExtras().getInt("id");
+              if (resultCode==Activity.RESULT_OK){
+                   int position=data.getIntExtra("numero",-1);
+                    Log.i("SNAPSHOT POSITIION",String.valueOf(position));
                     try {
                         listado=new DescargarListadoCheckIn(this).execute().get();
                     } catch (InterruptedException e) {
@@ -145,14 +153,10 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(this,listado.get(position).getRuta(),Toast.LENGTH_LONG).show();
-                }
-
-               /* if (resultCode==Activity.RESULT_OK){
-                    Uri selectedImage = data.getData();
-                    urifotoSeleccionada=selectedImage.getPath();
-                    Log.i("FOTO SELECCIONADA", urifotoSeleccionada);
+                    selectedweight=listado.get(position).getPeso();
+                    prevcheckin=listado.get(position);
                     InputStream imageStream = null;
+                    Uri selectedImage=Uri.parse ("file:///"+listado.get(position).getRuta());
                     try {
                         imageStream = getContentResolver().openInputStream(selectedImage);
                     } catch (FileNotFoundException e) {
@@ -171,8 +175,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     imgpicked.setImageBitmap(fotoSeleccionada);
                     bandera+=1;
 
+                }
 
-                }*/
                 break;
             }
         }
@@ -194,14 +198,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.imgPicked:{
-                /*Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()+"/progress/");
-                intent.setDataAndType(uri, "image/jpeg");
-                startActivityForResult(Intent.createChooser(intent, ""), 1);*/
                 Intent vintent=new Intent(this,ListadoCheckinsActivity.class);
                 startActivityForResult(vintent,1);
-
                 break;
             }
             case R.id.btnSnapshot_Share:{
@@ -227,6 +225,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     }
                     Toast.makeText(this, R.string.snapshot_saved,Toast.LENGTH_LONG).show();
                     btnSave.setEnabled(false);
+                    imgpicked.setEnabled(false);
+                    img.setEnabled(false);
                 }
                 else {
                     Toast.makeText(this, R.string.snapshot_pickimages,Toast.LENGTH_LONG).show();
@@ -241,6 +241,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     urifotoSeleccionada="";
                     urifotoTomada="";
                     btnSave.setEnabled(true);
+                    img.setEnabled(true);
+                    imgpicked.setEnabled(true);
                     AlertDialog.Builder dialog=new AlertDialog.Builder(this);
                     dialog.setTitle(getResources().getText(R.string.app_name));
                     dialog.setMessage(getResources().getText(R.string.snapshot_menu_question));
@@ -312,15 +314,15 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         Drawable d = getResources().getDrawable(R.drawable.ic_launcher);
         d.setBounds(0, 0, 50, 50);
         d.draw(comboImage);
-        difference=lastcheckin.getPeso()-weight;
+        difference=weight-selectedweight;
         String captionString =difference+" libras"; //SHARED PREFERENCE
-        String year=lastcheckin.getFecha().substring(2,4);
-        String month=getMonth(Integer.valueOf(lastcheckin.getFecha().toString().substring(5,7)));
-        String caption1=month.substring(1,3)+"/"+year;
+        String year=prevcheckin.getFecha().substring(2,4);
+        String month=getMonth(Integer.valueOf(prevcheckin.getFecha().toString().substring(5,7)));
+        String caption1=month.substring(0,3)+"/"+year;
         String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
         year=timeStamp.substring(2,4);
         month=getMonth(Integer.valueOf(timeStamp.substring(5,7)));
-        String caption2=month.substring(1,3)+"/"+year;
+        String caption2=month.substring(0,3)+"/"+year;
         Typeface plain = Typeface.createFromAsset(getAssets(), "fonts/LeagueSpartan.otf");
         Typeface bold = Typeface.create(plain, Typeface.BOLD);
         Paint paintText = new Paint(Paint.ANTI_ALIAS_FLAG);
