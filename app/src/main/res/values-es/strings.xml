@@ -41,13 +41,14 @@
 
     <!--WEIGHT WATCH-->
     <string name="weight_enter">Ingresa tu peso actual:</string>
-    <array name="list_measure">
+    <string-array name="list_measure">
         <item>lbs</item>
         <item>kg</item>
-    </array>
+    </string-array>
     <string name="weight_btn">Marcar!</string>
     <string name="weight_validation">Peso incorrecto.</string>
     <string name="photo_chooser">Hiciste click en </string>
     <string name="photo_wait">Descargando imágenes...</string>
     <string name="snapshot_invalid_image">La imagen seleccionada no existe.</string>
+    <string name="hello_world">Hola</string>
 </resources>

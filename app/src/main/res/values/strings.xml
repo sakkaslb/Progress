@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Progress</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancel</string>
@@ -53,4 +52,5 @@
     <!--PHOTO PICKER-->
     <string name="photo_chooser">You clicked </string>
     <string name="photo_wait">Downloading images... </string>
- </resources>
+    <string name="hello_world">Hello</string>
+</resources>

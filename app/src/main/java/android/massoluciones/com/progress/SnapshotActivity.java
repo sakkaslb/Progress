@@ -317,12 +317,14 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         difference=weight-selectedweight;
         String captionString =difference+" libras"; //SHARED PREFERENCE
         String year=prevcheckin.getFecha().substring(2,4);
-        String month=getMonth(Integer.valueOf(prevcheckin.getFecha().toString().substring(5,7)));
-        String caption1=month.substring(0,3)+"/"+year;
+        String month=getMonth(Integer.valueOf(prevcheckin.getFecha().toString().substring(4,6)));
+        String day=prevcheckin.getFecha().toString().substring(6,8);
+        String caption1=day+"/"+month.substring(0,3)+"/"+year;
         String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
         year=timeStamp.substring(2,4);
-        month=getMonth(Integer.valueOf(timeStamp.substring(5,7)));
-        String caption2=month.substring(0,3)+"/"+year;
+        month=getMonth(Integer.valueOf(timeStamp.substring(4,6)));
+        day=timeStamp.substring(6,8);
+        String caption2=day+"/"+month.substring(0,3)+"/"+year;
         Typeface plain = Typeface.createFromAsset(getAssets(), "fonts/LeagueSpartan.otf");
         Typeface bold = Typeface.create(plain, Typeface.BOLD);
         Paint paintText = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -335,8 +337,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             paintText.setTypeface(bold);
             Rect rectText = new Rect();
             paintText.getTextBounds(captionString, 0, captionString.length(), rectText);
-            comboImage.drawText(captionString,
-                    160, rectText.height(), paintText);
+            int x=(comboImage.getWidth() / 2) - (rectText.width() / 2);
+            comboImage.drawText(captionString,x, rectText.height(), paintText);//160
             }
 
         if(caption1 != null) {
@@ -347,8 +349,10 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             paintText.setTypeface(bold);
             Rect rectText = new Rect();
             paintText.getTextBounds(caption1, 0, caption1.length(), rectText);
+            int x=(comboImage.getWidth() / 4) - (rectText.width() / 2);
+            Log.i("SNAPSHOT TEXTO 1", String.valueOf(x));
             comboImage.drawText(caption1,
-                    70, 500, paintText);
+                    x, comboImage.getHeight()-200, paintText); //70
         }
 
         if(caption2 != null) {
@@ -359,8 +363,10 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
             paintText.setTypeface(bold);
             Rect rectText = new Rect();
             paintText.getTextBounds(caption2, 0, caption2.length(), rectText);
+            int x=((comboImage.getWidth()/4)*3) - (rectText.width() / 2);
+            Log.i("SNAPSHOT TEXTO 2", String.valueOf(x));
             comboImage.drawText(caption2,
-                    370, 500, paintText);
+                    x, comboImage.getHeight()-200, paintText); //370
         }
         timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String tmpImg ="progress_combined_"+timeStamp + ".jpg";
