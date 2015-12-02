@@ -10,6 +10,79 @@
         android:layout_height="match_parent"
         android:id="@+id/imgSocial"
         android:src="@drawable/ic_social"
-        android:layout_alignParentEnd="true"
-        />
+        android:layout_alignParentEnd="true"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgFacebook"
+                android:layout_gravity="bottom"
+                android:src="@drawable/facebook"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:id="@+id/btnSocialFacebook"
+                android:layout_gravity="bottom"
+                android:background="@color/facebook"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgTwitter"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/twitter"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/btnSocialTwitter"
+                android:layout_gravity="center_vertical"
+                android:background="@color/twitter"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgInstagram"
+                android:layout_gravity="top"
+                android:src="@drawable/instagram"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/btnSocialInstagram"
+                android:layout_gravity="top"
+                android:background="@color/instagram"/>
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>
