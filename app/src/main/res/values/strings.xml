@@ -53,4 +53,9 @@
     <string name="photo_chooser">You clicked </string>
     <string name="photo_wait">Downloading images... </string>
     <string name="hello_world">Hello</string>
+
+    <!--SOCIAL-->
+    <string name="social_facebook">Follow us on Facebook</string>
+    <string name="social_twitter">Follow us on Twitter</string>
+    <string name="social_instagram">Follow us on Instagram</string>
 </resources>

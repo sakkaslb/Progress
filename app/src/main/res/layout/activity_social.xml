@@ -21,67 +21,52 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_marginStart="@dimen/size20dp"
+            android:layout_marginEnd="@dimen/size20dp"
             android:layout_weight="2">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgFacebook"
-                android:layout_gravity="bottom"
-                android:src="@drawable/facebook"/>
-
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:text="@string/social_facebook"
                 android:id="@+id/btnSocialFacebook"
                 android:layout_gravity="bottom"
-                android:background="@color/facebook"/>
+                style="@style/buttonfacebook"/>
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_marginStart="@dimen/size20dp"
+            android:layout_marginEnd="@dimen/size20dp"
             android:layout_weight="2">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgTwitter"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/twitter"/>
-
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New Button"
+                android:text="@string/social_twitter"
                 android:id="@+id/btnSocialTwitter"
                 android:layout_gravity="center_vertical"
-                android:background="@color/twitter"/>
+                style="@style/buttontwitter"/>
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_marginStart="@dimen/size20dp"
+            android:layout_marginEnd="@dimen/size20dp"
             android:layout_weight="2">
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgInstagram"
-                android:layout_gravity="top"
-                android:src="@drawable/instagram"/>
-
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New Button"
+                android:text="@string/social_instagram"
                 android:id="@+id/btnSocialInstagram"
                 android:layout_gravity="top"
-                android:background="@color/instagram"/>
+                style="@style/buttoninstagram"/>
         </LinearLayout>
     </LinearLayout>
 
