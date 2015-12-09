@@ -23,9 +23,9 @@ public class SplashActivity extends Activity {
 
             @Override
             public void run() {
-                SharedPreferences prefs=getSharedPreferences("loginUsuarios",MODE_PRIVATE);
-                Boolean res=prefs.getBoolean("session",false);
-                if (res)
+                SharedPreferences prefs=getSharedPreferences("progressPrefs",MODE_PRIVATE);
+                String nombre=prefs.getString("nombre","");
+                if (nombre.length()>0)
                 {
                     Intent mainIntent = new Intent().setClass(
                             SplashActivity.this, MainActivity.class);

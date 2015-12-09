@@ -162,21 +162,23 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
                     Uri selectedImage=Uri.parse ("file:///"+listado.get(position).getRuta());
                     try {
                         imageStream = getContentResolver().openInputStream(selectedImage);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize=8;
+                        yourSelectedImage = BitmapFactory.decodeStream(imageStream,null,options);
+                        Matrix matrix = new Matrix();
+                        matrix.postRotate(90);
+                        fotoSeleccionada = Bitmap.createBitmap(yourSelectedImage, 0, 0,
+                                yourSelectedImage.getWidth(), yourSelectedImage.getHeight(),
+                                matrix, true);
+                        ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
+                        fotoSeleccionada.compress(Bitmap.CompressFormat.JPEG,0,bmpStream);
+                        imgpicked.setImageBitmap(fotoSeleccionada);
+                        bandera+=1;
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
+                        Toast.makeText(this,R.string.snapshot_invalid_image, Toast.LENGTH_LONG).show();
                     }
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize=8;
-                    yourSelectedImage = BitmapFactory.decodeStream(imageStream,null,options);
-                    Matrix matrix = new Matrix();
-                    matrix.postRotate(90);
-                    fotoSeleccionada = Bitmap.createBitmap(yourSelectedImage, 0, 0,
-                            yourSelectedImage.getWidth(), yourSelectedImage.getHeight(),
-                            matrix, true);
-                    ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
-                    fotoSeleccionada.compress(Bitmap.CompressFormat.JPEG,0,bmpStream);
-                    imgpicked.setImageBitmap(fotoSeleccionada);
-                    bandera+=1;
+
 
                 }
 
