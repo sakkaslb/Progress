@@ -2,10 +2,6 @@ package android.massoluciones.com.progress;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -20,9 +16,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-
-import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -48,21 +41,7 @@ public class MemoryActivity extends Activity {
         coverFlow.setSpacing(-25);
         coverFlow.setSelection(4, true);
         coverFlow.setAnimationDuration(1000);
- /*
-        int i=0;
-        CheckIn check;
-        if (listado.size()>0){
-            while (i<listado.size()){
-                check=listado.get(i);
 
-
-                i++;
-            }
-
-        } else {
-            Toast.makeText(this,R.string.memory_noimages, Toast.LENGTH_LONG).show();
-        }
-        */
     }
 
     @Override
@@ -84,19 +63,6 @@ class ImageAdapter extends BaseAdapter {
     private Context mContext;
     ArrayList<CheckIn> mImageIds;
     private ImageView[] mImages;
-   /* private Integer[] mImageIds = {
-            R.drawable.facebook,
-            R.drawable.instagram,
-            R.drawable.twitter,
-            R.drawable.facebook,
-            R.drawable.instagram,
-            R.drawable.twitter,
-            R.drawable.facebook,
-            R.drawable.instagram,
-            R.drawable.twitter
-
-    };*/
-
 
     public ImageAdapter(Context c, ArrayList<CheckIn> plistado) {
         mContext = c;

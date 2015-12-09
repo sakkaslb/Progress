@@ -22,19 +22,20 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1">
+            android:layout_weight="2">
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/size10dp">
 
         <com.example.coverflow.CoverFlow
             android:id="@+id/coverflow"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="fill_parent"
+            />
 
         </LinearLayout>
     </LinearLayout>

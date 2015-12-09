@@ -51,7 +51,7 @@
     <string name="photo_wait">Descargando imágenes...</string>
     <string name="snapshot_invalid_image">La imagen seleccionada no existe.</string>
     <string name="hello_world">Hola</string>
-    <string name="social_facebook">Síguenos on Facebook</string>
+    <string name="social_facebook">Síguenos en Facebook</string>
     <string name="social_instagram">Síguenos en Instagram</string>
     <string name="social_twitter">Síguenos en Twitter</string>
     <string name="memory_noimages">Aún no tienes imágenes en Progress.</string>

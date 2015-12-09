@@ -16,15 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:label="Progress"/>
-        <activity android:name=".LoginActivity" android:label="Progress" android:theme="@style/Theme.FloatingWindow.Popup"/>
-        <activity android:name=".GoalsActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".MemoryActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".ProgressActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".SocialActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".SnapshotActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".WeightActivity" android:label="Progress"    android:theme="@style/Theme.FloatingWindow.Popup"/>
-        <activity android:name=".ListadoCheckinsActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".SnapshotActivity"/>
+        <activity android:name=".MainActivity" android:label="Progress" android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity" android:label="Progress" android:theme="@style/Theme.FloatingWindow.Popup" android:screenOrientation="portrait"/>
+        <activity android:name=".GoalsActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".MemoryActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ProgressActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SocialActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SnapshotActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".WeightActivity" android:label="Progress"    android:theme="@style/Theme.FloatingWindow.Popup" android:screenOrientation="portrait"/>
+        <activity android:name=".ListadoCheckinsActivity" android:label="Progress"    android:theme="@style/Theme.MyFancyTheme" android:parentActivityName=".SnapshotActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
