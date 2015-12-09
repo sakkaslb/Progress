@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -67,7 +68,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
     Integer bandera=0;
     Button btnPick, btnNew, btnSave;
     View view_instance;
-    String mediaPath, urifotoTomada, urifotoSeleccionada;
+    String mediaPath, urifotoTomada, urifotoSeleccionada, measure;
     Integer weight=0, difference=0, selectedweight=0;
     CheckIn lastcheckin, prevcheckin;
     ArrayList<CheckIn> listado;
@@ -93,6 +94,8 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         btnNew.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         img.setOnClickListener(this);
+        SharedPreferences prefs=getSharedPreferences("progressPrefs", Context.MODE_PRIVATE);
+        measure=prefs.getString("medida","lbs");
         TakePic();
     }
 
@@ -315,7 +318,7 @@ public class SnapshotActivity extends Activity implements View.OnClickListener{
         d.setBounds(0, 0, 50, 50);
         d.draw(comboImage);
         difference=weight-selectedweight;
-        String captionString =difference+" libras"; //SHARED PREFERENCE
+        String captionString =difference+ measure; //SHARED PREFERENCE
         String year=prevcheckin.getFecha().substring(2,4);
         String month=getMonth(Integer.valueOf(prevcheckin.getFecha().toString().substring(4,6)));
         String day=prevcheckin.getFecha().toString().substring(6,8);

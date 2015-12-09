@@ -11,6 +11,7 @@
     <string name="register_Email">Email</string>
     <string name="register_Register">Registrarse</string>
     <string name="register_AlreadySignedIn"><u>Ya te registraste? Ingresa aquí!</u></string>
+    <string name="register_CreateUser">Completa todos los campos.</string>
 
     <!-- LOGIN FORM-->
     <string name="login_button">Acceder</string>

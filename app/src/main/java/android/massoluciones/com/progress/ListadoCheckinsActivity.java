@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,7 +35,9 @@ public class ListadoCheckinsActivity extends Activity {
             e.printStackTrace();
         }
         grid=(GridView)findViewById(R.id.mtxListadoCheckIns);
-        grid.setAdapter(new CustomAdapter(this, "lbs", checkIns)); //SHARED PREFERENCES
+        SharedPreferences prefs=getSharedPreferences("progressPrefs", Context.MODE_PRIVATE);
+        String measure=prefs.getString("medida","lbs");
+        grid.setAdapter(new CustomAdapter(this, measure, checkIns)); //SHARED PREFERENCES
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

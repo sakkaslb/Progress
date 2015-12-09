@@ -30,14 +30,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
-    @Override
+  /*  @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -51,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -61,9 +61,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.menu_btnGoals:{
-                Toast.makeText(this,getResources().getText(R.string.menu_goals), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(this,getResources().getText(R.string.menu_goals), Toast.LENGTH_SHORT).show();
                 Intent vintent=new Intent(this,GoalsActivity.class);
-                startActivity(vintent);
+                startActivity(vintent);*/
                 break;
             }
             case R.id.menu_btnMemoryLane:{
@@ -73,9 +73,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             }
             case R.id.menu_btnProgress:{
-                Toast.makeText(this,getResources().getText(R.string.menu_progress), Toast.LENGTH_SHORT).show();
+               /* Toast.makeText(this,getResources().getText(R.string.menu_progress), Toast.LENGTH_SHORT).show();
                 Intent vintent=new Intent(this,ProgressActivity.class);
-                startActivity(vintent);
+                startActivity(vintent);*/
                 break;
             }
             case R.id.menu_btnSnapshot:{

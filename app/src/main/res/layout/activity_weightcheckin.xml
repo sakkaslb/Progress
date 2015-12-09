@@ -69,14 +69,24 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="2">
 
-                <Spinner
+                <!--<Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/cmbMeasure"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginEnd="@dimen/size35dp"
                     android:layout_marginTop="@dimen/size50dp"
-                    />
+                    />-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="@dimen/size35dp"
+                    android:layout_marginTop="@dimen/size50dp"
+                    android:text=""
+                    android:id="@+id/txtMeasure" />
             </LinearLayout>
         </LinearLayout>
 

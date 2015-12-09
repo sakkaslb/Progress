@@ -12,6 +12,7 @@
     <string name="register_Email">Email</string>
     <string name="register_Register">Register</string>
     <string name="register_AlreadySignedIn"><u>Are you already registered? Sign in!</u></string>
+    <string name="register_CreateUser">Complete all the fields.</string>
 
     <!-- LOGIN FORM-->
     <string name="login_button">Login</string>

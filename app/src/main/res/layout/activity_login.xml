@@ -64,27 +64,27 @@
         android:layout_below="@+id/imgRegistro_Email"
         android:layout_marginTop="@dimen/size10dp"/>
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/register_Password"
+        android:id="@+id/cmbRegistroMeasure"
         android:ems="10"
-        android:id="@+id/registro_txtPassword"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="@dimen/size35dp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/imgRegistro_Password"
         android:layout_below="@+id/registro_txtEmail"
         android:layout_marginTop="@dimen/size10dp"
-        style="@style/textbox"/>
+        android:layout_marginBottom="@dimen/size20dp"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register_Register"
         android:id="@+id/btnRegister"
-        android:layout_below="@+id/imgRegistro_Password"
-        android:layout_marginTop="@dimen/size50dp"
-        style="@style/button"/>
+        style="@style/button"
+        android:layout_below="@+id/cmbRegistroMeasure"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
         android:id="@+id/registro_btnAlreadySigned"
         android:layout_below="@+id/btnRegister"
         android:layout_alignStart="@+id/btnRegister"
-        style="@style/labellink"/>
-
+        style="@style/labellink"
+        android:visibility="gone"/>
 
 </RelativeLayout>

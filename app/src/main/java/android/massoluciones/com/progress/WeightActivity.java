@@ -1,7 +1,9 @@
 package android.massoluciones.com.progress;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class WeightActivity extends Activity {
     EditText txtWeight;
-    Spinner cmbMeasure;
+    TextView cmbMeasure;
     Button btnWeight;
     Integer weight;
     @Override
@@ -24,11 +27,11 @@ public class WeightActivity extends Activity {
         setContentView(R.layout.activity_weightcheckin);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         txtWeight=(EditText) findViewById(R.id.txtWeight);
-        cmbMeasure=(Spinner) findViewById(R.id.cmbMeasure);
+        cmbMeasure=(TextView) findViewById(R.id.txtMeasure);
         btnWeight=(Button)findViewById(R.id.btnWeightCheck);
-        ArrayAdapter<CharSequence> adaptador=ArrayAdapter.createFromResource(this, R.array.list_measure, android.R.layout.simple_spinner_item);
-        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cmbMeasure.setAdapter(adaptador);
+        SharedPreferences prefs=getSharedPreferences("progressPrefs", Context.MODE_PRIVATE);
+        String measure=prefs.getString("medida","lbs");
+        cmbMeasure.setText(measure);
         btnWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
