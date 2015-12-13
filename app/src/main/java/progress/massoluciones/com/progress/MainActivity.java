@@ -1,12 +1,14 @@
-package android.massoluciones.com.progress;
+package progress.massoluciones.com.progress;
 
 import android.content.Intent;
+import android.massoluciones.com.progress.R;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -16,6 +18,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView link = (TextView) findViewById(R.id.txtPrivacyPolicy);
+        String linkText = "<a href='http://www.keeprogress.com'>Privacy Policy</a>";
+        link.setText(Html.fromHtml(linkText));
+        link.setMovementMethod(LinkMovementMethod.getInstance());
         Button btnGoals=(Button) findViewById(R.id.menu_btnGoals);
         Button btnSnapshot=(Button) findViewById(R.id.menu_btnSnapshot);
         Button btnSocial=(Button) findViewById(R.id.menu_btnSocial);

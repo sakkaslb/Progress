@@ -29,6 +29,7 @@
     <string name="menu_progress">Progress</string>
     <string name="menu_social">Social</string>
     <string name="menu_memory">Memory Lane</string>
+    <string name="menu_privacypolicy"><u>Privacy Policy</u></string>
 
     <!-- SNAPSHOT MENU-->
     <string name="snapshot_share">Share</string>

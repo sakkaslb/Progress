@@ -1,7 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"  tools:context=".MainActivity"
-    android:background="#ff000000">
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#ff000000">
 
     <ImageView
         android:layout_width="match_parent"
@@ -29,15 +28,14 @@
         android:background="@android:color/transparent"
         android:text=""
         android:id="@+id/menu_btnSnapshot"
-        android:layout_alignTop="@+id/menu_btnGoals"
-        android:layout_toEndOf="@+id/menu_btnGoals"
         android:layout_marginLeft="@dimen/size30dp"
-        />
+        android:layout_above="@+id/menu_btnProgress"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="@android:color/holo_green_dark"
         android:text=""
         android:id="@+id/menu_btnProgress"
         android:layout_alignTop="@+id/menu_btnGoals"
@@ -53,8 +51,8 @@
         android:id="@+id/menu_btnSocial"
         android:layout_below="@+id/menu_btnGoals"
         android:layout_alignTop="@+id/menu_btnGoals"
-        android:layout_marginTop="@dimen/size100dp"
-        android:layout_marginLeft="@dimen/size75dp" />
+        android:layout_marginTop="@dimen/size75dp"
+        android:layout_marginLeft="@dimen/size80dp" />
     <Button
         android:layout_width="@dimen/size80dp"
         android:layout_height="wrap_content"
@@ -64,8 +62,8 @@
         android:layout_below="@+id/menu_btnGoals"
         android:layout_alignTop="@+id/menu_btnGoals"
         android:layout_toEndOf="@+id/menu_btnSocial"
-        android:layout_marginTop="@dimen/size100dp"
-        android:layout_marginLeft="@dimen/size35dp" />
+        android:layout_marginTop="@dimen/size75dp"
+        android:layout_marginLeft="@dimen/size70dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -77,5 +75,4 @@
         android:layout_below="@+id/menu_btnSocial"
         android:layout_alignParentStart="true"
         android:textColor="@color/accent"/>
-
 </RelativeLayout>

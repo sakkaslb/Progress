@@ -1,4 +1,4 @@
-package android.massoluciones.com.progress;
+package progress.massoluciones.com.progress;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

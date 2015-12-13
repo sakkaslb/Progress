@@ -1,8 +1,9 @@
-package android.massoluciones.com.progress;
+package progress.massoluciones.com.progress;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.massoluciones.com.progress.R;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;

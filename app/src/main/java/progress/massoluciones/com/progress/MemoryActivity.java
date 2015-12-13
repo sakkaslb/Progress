@@ -1,7 +1,8 @@
-package android.massoluciones.com.progress;
+package progress.massoluciones.com.progress;
 
 import android.app.Activity;
 import android.content.Context;
+import android.massoluciones.com.progress.R;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;

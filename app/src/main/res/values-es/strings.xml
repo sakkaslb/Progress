@@ -56,4 +56,5 @@
     <string name="social_instagram">Síguenos en Instagram</string>
     <string name="social_twitter">Síguenos en Twitter</string>
     <string name="memory_noimages">Aún no tienes imágenes en Progress.</string>
+    <string name="menu_privacypolicy"><u>Política de Privacidad</u></string>
 </resources>

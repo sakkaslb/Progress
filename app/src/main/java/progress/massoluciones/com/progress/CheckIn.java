@@ -1,4 +1,4 @@
-package android.massoluciones.com.progress;
+package progress.massoluciones.com.progress;
 
 /**
  * Created by Stefanie on 14/11/2015.

@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"  tools:context=".MainActivity"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="#ff000000">
 
     <ImageView
@@ -24,15 +24,15 @@
         android:visibility="invisible"/>
 
     <Button
-        android:layout_width="@dimen/size80dp"
+        android:layout_width="@dimen/size135dp"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text=""
         android:id="@+id/menu_btnSnapshot"
-        android:layout_alignTop="@+id/menu_btnGoals"
-        android:layout_toEndOf="@+id/menu_btnGoals"
         android:layout_marginLeft="@dimen/size30dp"
-        />
+        android:layout_above="@+id/menu_btnProgress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -43,29 +43,25 @@
         android:layout_alignTop="@+id/menu_btnGoals"
         android:layout_toEndOf="@+id/menu_btnSnapshot"
         android:layout_marginLeft="@dimen/size30dp"
-        android:visibility="invisible"/>1
+        android:visibility="invisible"/>
 
     <Button
-        android:layout_width="@dimen/size80dp"
+        android:layout_width="@dimen/size155dp"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text=""
         android:id="@+id/menu_btnSocial"
-        android:layout_below="@+id/menu_btnGoals"
-        android:layout_alignTop="@+id/menu_btnGoals"
-        android:layout_marginTop="@dimen/size100dp"
-        android:layout_marginLeft="@dimen/size75dp" />
+        android:layout_marginLeft="@dimen/size100dp"
+        android:layout_toStartOf="@+id/menu_btnSnapshot"
+        android:layout_alignTop="@+id/menu_btnMemoryLane" />
     <Button
-        android:layout_width="@dimen/size80dp"
+        android:layout_width="@dimen/size135dp"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text=""
         android:id="@+id/menu_btnMemoryLane"
-        android:layout_below="@+id/menu_btnGoals"
-        android:layout_alignTop="@+id/menu_btnGoals"
-        android:layout_toEndOf="@+id/menu_btnSocial"
-        android:layout_marginTop="@dimen/size100dp"
-        android:layout_marginLeft="@dimen/size35dp" />
+        android:layout_below="@+id/menu_btnSnapshot"
+        android:layout_toEndOf="@+id/menu_btnSnapshot" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -77,5 +73,4 @@
         android:layout_below="@+id/menu_btnSocial"
         android:layout_alignParentStart="true"
         android:textColor="@color/accent"/>
-
 </RelativeLayout>

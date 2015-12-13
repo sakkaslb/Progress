@@ -1,4 +1,4 @@
-package android.massoluciones.com.progress;
+package progress.massoluciones.com.progress;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.massoluciones.com.progress.R;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
